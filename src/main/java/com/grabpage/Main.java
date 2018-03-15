@@ -20,7 +20,7 @@ public class Main {
 
   public static void main(String[] argv) {
 
-    Args args = new Args();
+    Args args = Args.getInstance();
     JCommander.newBuilder()
         .addObject(args)
         .build()
@@ -39,10 +39,8 @@ public class Main {
 
       if (DownloadPage.loadWebPage(url, outputDir, disableResources)) {
         System.out.println("Page " + url.getPath() + " grabbed successfully!!");
-
       }
-      System.out.println("Pages grabbed successfully! Exit!");
-
     }
+    System.out.println("Pages grabbed successfully! Exit!");
   }
 }

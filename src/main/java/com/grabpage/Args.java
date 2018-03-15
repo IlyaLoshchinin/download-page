@@ -32,24 +32,34 @@ import org.apache.commons.io.FileUtils;
  */
 public class Args {
 
+  private Args() {
+  }
+
+  public static final Args INSTANCE = new Args();
+
+  public static Args getInstance() {
+    return INSTANCE;
+  }
+
   @Parameter(names = "-help", help = true)
   private boolean help;
 
   @Parameter(names = {
       "-url"}, required = true, description = "The URLs of page to download", listConverter = URLListConverter.class)
-  List<URL> urls;
+  public List<URL> urls;
 
   @Parameter(names = {"-out",
       "--outputDirectory"}, help = true, description = "The output directory of page(-s). Default -> current app folder", converter = FileConverter.class, validateValueWith = DirectoryValidator.class)
-  File directory = new File("").getAbsoluteFile();
+  public File directory = new File("").getAbsoluteFile();
 
 
   @Parameter(names = {"-d",
-      "--disableResources"},help = true,splitter = SemiSplitter.class,description = "The resources(css,js,img) which is not going to download. Exp.: '-d css,js,img'",validateValueWith = ResourcesValidator.class)
-  List<String> dResources;
+      "--disableResources"}, help = true, splitter = SemiSplitter.class, description = "The resources(css,js,img) which is not going to download. Exp.: '-d css,js,img'", validateValueWith = ResourcesValidator.class)
+  public List<String> dResources;
 
 
   public static class SemiSplitter implements IParameterSplitter {
+
     public List<String> split(String value) {
       return Arrays.asList(value.split(","));
     }
