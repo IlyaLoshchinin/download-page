@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,10 +20,25 @@ public class DownloadPage {
   static String id = null;
 
 
-  public static boolean getWebPage(URL loadPage, File outputDir,String... disableResources) {
+  public static boolean loadWebPage(URL loadPage, File outputDir,String... disableResources) {
 
     String resourceDir = outputDir + "resources" + File.separator;
     String imagesDir = outputDir + "images" + File.separator;
+
+
+
+    System.out.println(loadPage);
+
+    File pageDir = new File(outputDir, FilenameUtils
+        .getName(loadPage.toString()));
+
+    try {
+      FileUtils.forceMkdir(pageDir);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    System.out.println(loadPage.toString());
+    System.out.println(pageDir.getAbsolutePath());
 
     try {
 

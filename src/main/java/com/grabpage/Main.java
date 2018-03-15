@@ -37,20 +37,7 @@ public class Main {
 
     for (URL url : args.urls) {
 
-      System.out.println(url);
-
-      File destDir = new File(outputDir, FilenameUtils
-          .getName(url.toString()));
-
-      try {
-        FileUtils.forceMkdir(destDir);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-      System.out.println(url.toString());
-      System.out.println(destDir.getAbsolutePath());
-
-      if (DownloadPage.getWebPage(url, destDir, disableResources)) {
+      if (DownloadPage.loadWebPage(url, outputDir, disableResources)) {
         System.out.println("Page " + url.getPath() + " grabbed successfully!!");
 
       }
